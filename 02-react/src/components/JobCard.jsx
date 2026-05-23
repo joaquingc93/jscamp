@@ -1,28 +1,52 @@
-import { useState } from "react"
+import styles from './JobCard.module.css'
+import { Link } from 'react-router'
 
 export function JobCard({ job }) {
-  const [isApplied, setIsApplied] = useState(false)
-
-  const handleApplyClick = () => {
-    setIsApplied(true)
-  }
-
-  const buttonClasses = isApplied ? 'button-apply-job is-applied' : 'button-apply-job'
-  const buttonText = isApplied ? 'Aplicado' : 'Aplicar'
+  const technologies = Array.isArray(job.data?.technology)
+    ? job.data.technology
+    : job.data?.technology
+    ? [job.data.technology]
+    : []
 
   return (
-    <article 
-      className="job-listing-card"
-      data-modalidad={job.data.modalidad}
-      data-nivel={job.data.nivel}
-      data-technology={job.data.technology}
+    <Link
+      to={`/jobs/${job.id}`}
+      className={styles.cardLink}
+      aria-label={`Ver detalles de ${job.titulo} en ${job.empresa}`}
     >
-      <div>
-        <h3>{job.titulo}</h3>
-        <small>{job.empresa} | {job.ubicacion}</small>
-        <p>{job.descripcion}</p>
-      </div>
-      <button className={buttonClasses} onClick={handleApplyClick}>{buttonText}</button>
-    </article>
+      <article className={styles.card}>
+        <div className={styles.header}>
+          <h3 className={styles.title}>{job.titulo}</h3>
+          {job.data?.nivel && <span className={styles.badge}>{job.data.nivel}</span>}
+        </div>
+
+        <div className={styles.meta}>
+          <p className={styles.company}>
+            <span className={styles.icon}>🏢</span>
+            {job.empresa}
+          </p>
+          <p className={styles.location}>
+            <span className={styles.icon}>📍</span>
+            {job.ubicacion}
+          </p>
+          
+        </div>
+
+        {technologies.length > 0 && (
+          <div className={styles.tags}>
+            {technologies.map((tag) => (
+              <span key={tag} className={styles.tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className={styles.footer}>
+          <span className={styles.salary}>Salario a convenir</span>
+          <span className={styles.viewMore}>Ver más →</span>
+        </div>
+      </article>
+    </Link>
   )
 }

@@ -1,76 +1,47 @@
-import { useId, useState, useRef } from "react"
+import styles from './SearchFormSection.module.css'
+import { useId, useRef } from 'react'
 
-const useSearchForm = ({ idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter }) => {
-  const timeoutId = useRef(null)
-  const [searchText, setSearchText] = useState("")
+
+
+export function SearchFormSection({initialtextToFilter, onSearch, onTextFilter}) {
+  const idText=useId()
+  const idTechnology=useId()
+  const idLocation=useId()
+  const idExperienceLevel=useId()
+
+  const timeoutId=useRef(null)
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    
     const formData = new FormData(event.currentTarget)
-    
-    if (event.target.name === idText) {
-      return // ya lo manejamos en onChange
-    }
-
     const filters = {
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
       experienceLevel: formData.get(idExperienceLevel)
     }
-
     onSearch(filters)
   }
 
   const handleTextChange = (event) => {
     const text = event.target.value
-    setSearchText(text) // actualizamos el input inmediatamente
-
-    // Debounce: Cancelar el timeout anterior
     if (timeoutId.current) {
       clearTimeout(timeoutId.current)
     }
-
     timeoutId.current = setTimeout(() => {
       onTextFilter(text)
     }, 500)
   }
 
-  return {
-    searchText,
-    handleSubmit,
-    handleTextChange
-  }
-}
 
-export function SearchFormSection ({ onTextFilter, onSearch, initialText }) {
-  const idText = useId()
-  const idTechnology = useId()
-  const idLocation = useId()
-  const idExperienceLevel = useId()
 
-  const inputRef = useRef()
-
-  const {
-    handleSubmit,
-    handleTextChange
-  } = useSearchForm({ idTechnology, idLocation, idExperienceLevel, idText, onSearch, onTextFilter })
-
-  const handleClearInput = (event) => {
-    event.preventDefault()
-
-    inputRef.current.value = ""
-    onTextFilter("")
-  }
 
   return (
-    <section className="jobs-search">
+    <section className={styles.jobsSearch}>
       <h1>Encuentra tu próximo trabajo</h1>
       <p>Explora miles de oportunidades en el sector tecnológico.</p>
 
-      <form onChange={handleSubmit} id="empleos-search-form" role="search">
-
-        <div className="search-bar">
+      <form id="empleos-search-form" role="search" onChange={handleSubmit}>
+        <div className={styles.searchBar}>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"
             className="icon icon-tabler icons-tabler-outline icon-tabler-search">
@@ -78,21 +49,12 @@ export function SearchFormSection ({ onTextFilter, onSearch, initialText }) {
             <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
             <path d="M21 21l-6 -6" />
           </svg>
-          
-          <input
-            ref={inputRef}
-            name={idText} id="empleos-search-input" type="text"
-            placeholder="Buscar trabajos, empresas o habilidades"
-            onChange={handleTextChange}
-            defaultValue={initialText}
-          />
 
-          <button onClick={handleClearInput}>
-           ✖︎
-          </button>
+          <input defaultValue={initialtextToFilter} name={idText} id="empleos-search-input" required type="text" onChange={handleTextChange}
+            placeholder="Buscar trabajos, empresas o habilidades" />
         </div>
 
-        <div className="search-filters">
+        <div className={styles.searchFilters}>
           <select name={idTechnology} id="filter-technology">
             <option value="">Tecnología</option>
             <optgroup label="Tecnologías populares">
@@ -102,11 +64,9 @@ export function SearchFormSection ({ onTextFilter, onSearch, initialText }) {
               <option value="nodejs">Node.js</option>
             </optgroup>
             <option value="java">Java</option>
-            <hr />
             <option value="csharp">C#</option>
             <option value="c">C</option>
             <option value="c++">C++</option>
-            <hr />
             <option value="ruby">Ruby</option>
             <option value="php">PHP</option>
           </select>

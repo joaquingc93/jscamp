@@ -1,0 +1,61 @@
+.header {
+  border-bottom: 1px solid var(--border);
+  background: var(--background);
+  padding: .5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header h1 svg {
+  width: 2rem;
+  height: 2rem;
+  color: var(--primary-light);
+}
+
+.title svg {
+  width: 2rem;
+  height: 2rem;
+  color: var(--primary-light);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  font-weight: 500;
+}
+
+.nav a:hover,
+.nav a:focus {
+  color: var(--primary);
+  outline: none;
+}
+
+.avatars {
+  display: flex;
+  gap: 0.5rem;
+}

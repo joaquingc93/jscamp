@@ -119,54 +119,7 @@ h1 + p {
   margin-bottom: 2rem
 }
 
-/* Header */
-header {
-  border-bottom: 1px solid var(--border);
-  background: var(--background);
-  padding: .5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-
-  h2 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary);
-  }
-}
-
-/* Navegación del header a otras páginas */
-nav {
-  align-items: center;
-  gap: 1rem;
-  display: flex;
-
-  a {
-    text-decoration: none;
-    color: var(--text-secondary);
-    transition: color 0.2s;
-    font-weight: 500;
-
-    &:hover, &:focus {
-      color: var(--primary);
-      outline: none;
-    }
-  }
-}
-
-/* Botones del Header */
-header div a {
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  background-color: #334155;
-  color: var(--text-primary);
-  display: inline-block;
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-decoration: none;
-  /* TODO */
-}
+/* Header styles moved to component CSS modules */
 
 /* Hero */
 main > section:nth-child(1) {
@@ -374,86 +327,68 @@ article {
   }
 }
 
-/* Jobs Search */
-.jobs-search {
-  margin: 0;
-  padding: 0;
-  height: auto !important;
-
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: .25rem;
-  }
-
-  p {
-    font-size: 1.125rem;
-    color: var(--text-muted);
-    margin-bottom: 1.5rem;
-  }
-
-  .search-bar {
-    background: var(--input-bg);
-    padding: .25rem .5rem;
-    position: relative;
-  }
-
-  .search-filters {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: .5rem;
-  }
-
-  form {
-    width: 100%;
-    max-width: 1280px;
-  }
-
-  form div {
-    background: none;
-    box-shadow: none;
-    padding: 0;
-  }
+/* Estilos de prosa para contenido de detalle */
+.prose {
+  max-width: 70ch;
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #111827;
 }
 
-.jobs-listings {
-  border: 1px solid rgba(255, 255, 255, .3);
-  border-radius: 1rem;
-
-  .job-listing-card {
-    background: none;
-    box-shadow: none;
-    border-radius: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, .3);
-    margin: 0;
-
-    display: flex; /* valor original */
-    align-items: start;
-    gap: 1rem;
-
-    &.is-hidden {
-      display: none;
-    }
-
-    small {
-      font-size: .875rem;
-      opacity: .75;
-    }
-
-    p {
-      margin-top: 0.5rem
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
+.prose h1,
+.prose h2,
+.prose h3 {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  color: #111827;
 }
 
-.button-apply-job {
-  background: #09f;
+.prose h2 {
+  font-size: 1.5rem;
+   margin-top: 2rem; /* Más espacio arriba */
+  margin-bottom: 0.75rem; /* Menos espacio abajo */
+}
 
-  &.is-applied {
-    background: #4caf50;
-    pointer-events: none;
-  }
+.prose h3 {
+  font-size: 1.25rem;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
+
+.prose ul,
+.prose ol {
+  margin-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: #0052a3;
+}
+
+.prose code {
+  background: #f3f4f6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: 'Courier New', monospace;
 }

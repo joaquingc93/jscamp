@@ -1,8 +1,8 @@
-export function NotFoundPage () {
+export function NotFoundPage() {
   return (
-    <main>
-      <h1>404 - Página no encontrada</h1>
-      <p>Lo sentimos, la página que buscas no existe.</p>
-    </main>
-  )
+    <div>
+      <h1>404 - Page Not Found</h1>
+      <p>The page you are looking for does not exist.</p>
+    </div>
+  );
 }
