@@ -1,8 +1,8 @@
 /* pages/JobDetail.module.css */
 .container {
-  padding-block: 2rem;
-  max-width: 64rem;
-  margin: 0 auto;
+  inline-size: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+  padding-block: clamp(1.5rem, 4vw, 3rem);
 }
 
 .loading,
@@ -17,13 +17,13 @@
 
 .errorTitle {
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-block-end: 1rem;
 }
 
 .errorButton {
-  color: #09f;
+  color: var(--primary-light);
   background: none;
   border: none;
   cursor: pointer;
@@ -37,91 +37,272 @@
 .breadcrumb {
   font-size: 0.875rem;
   color: var(--text-muted);
-  margin-bottom: 2rem;
+  margin-block-end: 1rem;
 }
 
-.breadcrumbButton {
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  padding: 0;
+.breadcrumbList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.breadcrumbList li:not(:last-child)::after {
+  content: "/" / "";
+  margin-inline-start: 0.5rem;
+  color: var(--text-muted);
+}
+
+.breadcrumbLink {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 0.35rem 0.7rem;
   font-size: inherit;
   text-decoration: none;
+  border-radius: 999px;
 }
 
-.breadcrumbButton:hover {
+.breadcrumbLink:hover,
+.breadcrumbLink:focus-visible {
   color: var(--text-primary);
-}
-
-.breadcrumbSeparator {
-  margin: 0 0.5rem;
+  border-color: var(--primary-light);
+  background: rgba(0, 153, 255, 0.12);
 }
 
 .breadcrumbCurrent {
-  color: var(--text-primary);
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
 }
 
 .header {
-  margin-bottom: 2rem;
+  position: relative;
+  overflow: clip;
+  background:
+    radial-gradient(circle at top right, rgba(0, 153, 255, 0.24), transparent 18rem),
+    var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  margin-block-end: 1rem;
+  box-shadow: 0 16px 32px var(--shadow);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  inline-size: fit-content;
+  background: #10b981;
+  color: white;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-block-end: 0.9rem;
 }
 
 .title {
-  font-size: 2.25rem;
-  font-weight: bold;
+  display: block;
+  max-inline-size: 14ch;
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.06em;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  text-wrap: balance;
+  margin-block-end: 1rem;
 }
 
 .meta {
-  font-size: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
   color: var(--text-secondary);
+  font-size: clamp(0.95rem, 2vw, 1.125rem);
+}
+
+.meta p {
+  margin: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-block-start: 1.25rem;
+}
+
+.tag {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.layout {
+  display: grid;
+  grid-template-areas:
+    "sidebar"
+    "content";
+  gap: 1rem;
+  align-items: start;
+}
+
+.mainColumn {
+  grid-area: content;
+  min-inline-size: 0;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.summaryCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 16px var(--shadow);
+}
+
+.summaryTitle {
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-block-end: 1rem;
+}
+
+.factList {
+  display: grid;
+  gap: 0.85rem;
+  margin-block-end: 1.25rem;
+}
+
+.fact {
+  padding-block-end: 0.85rem;
+  border-block-end: 1px solid var(--border);
+}
+
+.fact:last-child {
+  padding-block-end: 0;
+  border-block-end: 0;
+}
+
+.fact dt {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-block-end: 0.15rem;
+}
+
+.fact dd {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.applyButton,
+.secondaryButton {
+  inline-size: 100%;
+  min-block-size: 2.75rem;
 }
 
 .applyButton {
-  width: 100%;
-  background: #09f;
+  background: var(--primary-light);
   color: white;
   border: none;
-  font-weight: 600;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  margin-bottom: 3rem;
-  transition: background 0.2s;
+  font-weight: 800;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.65rem;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 153, 255, 0.28);
 }
 
-.applyButton:hover {
-  background: #0088e6;
+.applyButton:hover,
+.applyButton:focus-visible {
+  background: var(--primary-hover);
+  box-shadow: 0 14px 28px rgba(0, 153, 255, 0.34);
+  transform: translateY(-1px);
 }
 
-.applyButton:disabled {
-  background: #666;
-  cursor: not-allowed;
-  opacity: 0.6;
+.secondaryButton {
+  margin-block-start: 0.75rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  font-weight: 600;
 }
 
-.applyButton:disabled:hover {
-  background: #666;
-}
-
-@media (min-width: 640px) {
-  .applyButton {
-    width: auto;
-  }
+.secondaryButton:hover,
+.secondaryButton:focus-visible {
+  color: var(--text-primary);
+  border-color: var(--primary-light);
+  background: rgba(0, 153, 255, 0.1);
 }
 
 .section {
-  margin-bottom: 3rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  margin-block-end: 1rem;
 }
 
 .sectionTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
+  position: relative;
+  font-size: clamp(1.25rem, 3vw, 1.625rem);
+  font-weight: 800;
   color: var(--text-primary);
-  margin-bottom: 1rem;
+  margin-block-end: 1rem;
+  padding-inline-start: 0.9rem;
+}
+
+.sectionTitle::before {
+  content: "";
+  position: absolute;
+  inset-block: 0.2rem;
+  inset-inline-start: 0;
+  inline-size: 4px;
+  border-radius: 999px;
+  background: var(--primary-light);
 }
 
 .sectionContent {
   color: var(--text-secondary);
+  overflow-wrap: break-word;
+}
+
+.section :global(.prose) {
+  max-inline-size: none;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+
+@media (min-width: 56rem) {
+  .header {
+    margin-block-end: 1.25rem;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 20rem);
+    grid-template-areas: "content sidebar";
+    gap: 1.25rem;
+  }
+
+  .sidebar {
+    position: sticky;
+    inset-block-start: 1rem;
+  }
 }
